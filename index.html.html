@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be my gf na nongkhaow v9 mobile</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #ffe6f0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+h1 {
+  margin-top: 50px;
+  font-size: 2em;
+  color: #d63384;
+  padding: 0 10px;
+}
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+button {
+  font-size: 1.5em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 70%;
+  max-width: 300px;
+}
+#yesBtn { background-color: #ff4da6; color: white; }
+#noBtn { background-color: #999; color: white; position: absolute; left: 0; top: 70px; }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 350px;
+  text-align: center;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.choiceBtn {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: #ff80bf;
+  color: white;
+}
+.floating-text {
+  position: absolute;
+  font-size: 1.2em;
+  color: #d63384;
+  animation: floatUp 5s linear forwards;
+  white-space: nowrap;
+  z-index: 5;
+}
+@keyframes floatUp {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-200px); }
+}
+@media(max-width:400px){
+  h1{font-size:1.8em;}
+  button{font-size:1.3em;width:80%;}
+  .choiceBtn{font-size:1.1em;padding:12px;}
+}
+</style>
+</head>
+<body>
+<h1>เป็นแฟนกันนะน้องข้าว? 💖</h1>
+<div class="buttons">
+  <button id="yesBtn">เป็นนนนนนน</button>
+  <button id="noBtn">ไม่เป็นหรอกกก</button>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <p id="modalText">เลือกทำอะไรกับพี่ดึ๊บดีน้า 💕</p>
+    <button class="choiceBtn" onclick="showPopup('น้องข้าวหอมแก้มพี่ดึ๊บ 💕')">หอมแก้มพี่ดึ๊บ 💕</button>
+    <button class="choiceBtn" onclick="showPopup('น้องข้าวกอดพี่ดึ๊บ 🤗')">กอดพี่ดึ๊บ 🤗</button>
+    <button class="choiceBtn" onclick="showPopup('พี่ดึ๊บหอมหัวน้องข้าว 🌸')">พี่ดึ๊บหอมหัว 🌸</button>
+  </div>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const modal = document.getElementById("myModal");
+const modalText = document.getElementById("modalText");
+
+// คลิก yes
+yesBtn.addEventListener("click", ()=>{
+  modalText.innerHTML = "💘 เย้! เราเป็นแฟนกันแล้ว 💘<br>เป็นแฟนกันแล้วนะ จะดูแลน้องข้าวให้ดีที่สุด อยู่ด้วยกันนานๆนะ";
+  modal.style.display="flex";
+});
+function closeModal(){modal.style.display="none";}
+
+// ฟังก์ชันให้ปุ่มหนี
+function moveButton(){
+  const x=Math.random()*(window.innerWidth-noBtn.offsetWidth);
+  const y=Math.random()*(window.innerHeight-noBtn.offsetHeight);
+  noBtn.style.left=x+"px";
+  noBtn.style.top=y+"px";
+}
+
+// รองรับ desktop และ mobile
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+function showPopup(message){alert(message);}
+
+// ข้อความลอย
+const messages=[
+"รักน้องข้าว 💕",
+"รักอ้วนนะ 💘",
+"ไปกินข้าวด้วยกันบ่อยๆนะ 🍚",
+"อยู่ด้วยกันไปนานๆน้า 💑",
+"น้องข้าวน่ารักสำหรับพี่ดึ๊บเสมออ 💘",
+"อนาคตแฟนพี่สวยจังเลยน้าา 🌸"
+];
+
+function createFloatingText(){
+  const text=document.createElement("div");
+  text.className="floating-text";
+  text.innerText=messages[Math.floor(Math.random()*messages.length)];
+  text.style.left=Math.random()*window.innerWidth+"px";
+  text.style.top=(window.innerHeight-50)+"px";
+  document.body.appendChild(text);
+  setTimeout(()=>text.remove(),5000);
+}
+setInterval(createFloatingText,2000);
+</script>
+</body>
+</html>
